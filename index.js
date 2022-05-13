@@ -24,58 +24,52 @@ server.use(restify.plugins.bodyParser());
 // Routes
 
 server.get("/", (req, res, next) => {
-  knex("teste").then((dados) => {
+  knex("cliente").then((dados) => {
     res.send(dados);
   }, next);
 });
 
-server.post("/create", (req, res, next) => {
-  knex("teste")
+// Clientes
+
+server.get("/listaClientes", (req, res, next) => {
+  knex("cliente").then((dados) => {
+    res.send(dados);
+  }, next);
+});
+
+server.post("/adicionaCliente", (req, res, next) => {
+  knex("cliente")
     .insert(req.body)
     .then((dados) => {
       res.send(dados);
     }, next);
 });
 
-server.get("/show/:id", (req, res, next) => {
+server.patch("/atualizarCliente/:id", (req, res, next) => {
   const { id } = req.params;
 
-  knex("teste")
-    .where("id", id)
-    .first() //Apenas o primeiro resultado
-    .then((dados) => {
-      if (!dados) {
-        return res.send(new errors.BadRequestError(`Não foi encontrado ${id}`));
-      }
-      res.send(dados);
-    }, next);
-});
-
-server.put("/update/:id", (req, res, next) => {
-  const { id } = req.params;
-
-  knex("teste")
+  knex("cliente")
     .where("id", id)
     .update(req.body)
     .then((dados) => {
       if (!dados) {
         return res.send(new errors.BadRequestError(`Erro`));
       }
-      res.send("Dados atualizados");
+      res.send("Dados atualizados com sucesso!");
     }, next);
 });
 
-server.del("/delete/:id", (req, res, next) => {
+server.del("/removerCliente/:id", (req, res, next) => {
   const { id } = req.params;
 
-  knex("teste")
+  knex("cliente")
     .where("id", id)
     .delete(req.body)
     .then((dados) => {
       if (!dados) {
-        return res.send(new errors.BadRequestError(`Erro`));
+        return res.send(new errors.BadRequestError(`Erro ao remover cliente`));
       }
-      res.send("Dados excluidos");
+      res.send("Cliente removido com sucesso!");
     }, next);
 });
 
