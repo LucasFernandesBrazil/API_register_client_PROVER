@@ -15,5 +15,14 @@
   "bugs": {
     "url": "https://github.com/LucasFernandesBrazil/API_register_client_PROVER/issues"
   },
-  "homepage": "https://github.com/LucasFernandesBrazil/API_register_client_PROVER#readme"
+  "homepage": "https://github.com/LucasFernandesBrazil/API_register_client_PROVER#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  },
+  "dependencies": {
+    "knex": "^2.0.0",
+    "mysql": "^2.18.1",
+    "restify": "^8.6.1",
+    "restify-errors": "^8.0.2"
+  }
 }
