@@ -31,13 +31,13 @@ server.get("/", (req, res, next) => {
 
 // Clientes
 
-server.get("/listaClientes", (req, res, next) => {
+server.get("/listarClientes", (req, res, next) => {
   knex("cliente").then((dados) => {
     res.send(dados);
   }, next);
 });
 
-server.post("/adicionaCliente", (req, res, next) => {
+server.post("/adicionarCliente", (req, res, next) => {
   knex("cliente")
     .insert(req.body)
     .then((dados) => {
@@ -70,6 +70,50 @@ server.del("/removerCliente/:id", (req, res, next) => {
         return res.send(new errors.BadRequestError(`Erro ao remover cliente`));
       }
       res.send("Cliente removido com sucesso!");
+    }, next);
+});
+
+// Processos
+
+server.get("/listarProcessos", (req, res, next) => {
+  knex("processo").then((dados) => {
+    res.send(dados);
+  }, next);
+});
+
+server.post("/adicionarProcesso", (req, res, next) => {
+  knex("processo")
+    .insert(req.body)
+    .then((dados) => {
+      res.send(dados);
+    }, next);
+});
+
+server.patch("/atualizarProcesso/:id", (req, res, next) => {
+  const { id } = req.params;
+
+  knex("processo")
+    .where("id", id)
+    .update(req.body)
+    .then((dados) => {
+      if (!dados) {
+        return res.send(new errors.BadRequestError(`Erro`));
+      }
+      res.send("Dados atualizados com sucesso!");
+    }, next);
+});
+
+server.del("/removerProcesso/:id", (req, res, next) => {
+  const { id } = req.params;
+
+  knex("processo")
+    .where("id", id)
+    .delete(req.body)
+    .then((dados) => {
+      if (!dados) {
+        return res.send(new errors.BadRequestError(`Erro ao remover Processo`));
+      }
+      res.send("Processo removido com sucesso!");
     }, next);
 });
 
