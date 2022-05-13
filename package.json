@@ -1,0 +1,19 @@
+{
+  "name": "api_register_client_prover",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LucasFernandesBrazil/API_register_client_PROVER.git"
+  },
+  "author": "Lucas Fernandes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LucasFernandesBrazil/API_register_client_PROVER/issues"
+  },
+  "homepage": "https://github.com/LucasFernandesBrazil/API_register_client_PROVER#readme"
+}
