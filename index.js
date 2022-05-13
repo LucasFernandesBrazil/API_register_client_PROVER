@@ -37,6 +37,48 @@ server.post("/create", (req, res, next) => {
     }, next);
 });
 
+server.get("/show/:id", (req, res, next) => {
+  const { id } = req.params;
+
+  knex("teste")
+    .where("id", id)
+    .first() //Apenas o primeiro resultado
+    .then((dados) => {
+      if (!dados) {
+        return res.send(new errors.BadRequestError(`Não foi encontrado ${id}`));
+      }
+      res.send(dados);
+    }, next);
+});
+
+server.put("/update/:id", (req, res, next) => {
+  const { id } = req.params;
+
+  knex("teste")
+    .where("id", id)
+    .update(req.body)
+    .then((dados) => {
+      if (!dados) {
+        return res.send(new errors.BadRequestError(`Erro`));
+      }
+      res.send("Dados atualizados");
+    }, next);
+});
+
+server.del("/delete/:id", (req, res, next) => {
+  const { id } = req.params;
+
+  knex("teste")
+    .where("id", id)
+    .delete(req.body)
+    .then((dados) => {
+      if (!dados) {
+        return res.send(new errors.BadRequestError(`Erro`));
+      }
+      res.send("Dados excluidos");
+    }, next);
+});
+
 server.listen(8080, function () {
   console.log("%s listening at %s", server.name, server.url);
 });
