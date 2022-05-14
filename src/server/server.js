@@ -1,4 +1,7 @@
 const express = require("express");
 const app = express();
 
-app.listen(8081);
+app.use(express.json());
+app.use("/cliente", require("./route/clientsRoutes"));
+
+app.listen(8080);
