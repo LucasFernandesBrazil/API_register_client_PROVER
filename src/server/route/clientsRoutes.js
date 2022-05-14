@@ -21,6 +21,19 @@ router.get("/pesquisaCliente/:id", async (req, res) => {
   });
 });
 
+router.get("/listarProcessos/:id", async (req, res) => {
+  const { id } = req.params;
+
+  clientsService.getProcess(id).then((data) => {
+    if (data.length === 0) {
+      res.statusCode = 404;
+      res.json("Id de cliente não encontrado");
+      return res;
+    }
+    res.json(data);
+  });
+});
+
 router.post("/adicionarCliente", async (req, res) => {
   clientsService.registerClient(req.body).then((data) => {
     if (!data) {

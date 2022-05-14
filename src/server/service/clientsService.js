@@ -8,6 +8,10 @@ exports.seachClient = (id) => {
   return clientsData.searchClient(id);
 };
 
+exports.getProcess = (id) => {
+  return clientsData.getProcess(id);
+};
+
 exports.registerClient = (body) => {
   return clientsData.registerClient(body);
 };
